@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 class Category(models.Model):
@@ -17,7 +19,7 @@ class Blogs(models.Model):
     # foreign key but not the actuall foreign key data.
     category = models.ForeignKey(Category, on_delete = models.CASCADE)
     content = models.TextField() # TEXT
-    author = models.CharField(max_length=100, null=False) # VARCHAR
+    author = models.ForeignKey(User, on_delete = models.CASCADE)
     image = models.ImageField(null = True, blank = False, upload_to = "blog")  # Varchar
     video = models.FileField(null = True, blank = True, upload_to = "blog_video")  # Varchar
 

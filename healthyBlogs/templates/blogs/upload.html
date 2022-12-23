@@ -43,14 +43,15 @@
         #output {
             min-height: 400px;
             box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.19);
-            background-color: #202124;
-            color: whitesmoke;
+            background-color: white;
+            color: black;
             margin-top: 1rem;
             margin-bottom: 1rem;
+            padding: 10px;
         }
 
         #output:focus {
-            box-shadow: 0 0 10px 0px #d6e6ff;
+            border: 1px solid black;
             outline: none;
         }
     </style>
@@ -75,22 +76,7 @@
                 <form action ="" method = "post" enctype="multipart/form-data" class="mt-5 p-3 pb-5">
                     {% csrf_token %}
 
-                    <label for="title">Blog Title</label>
-                    <input type="text" name="title" id="title" class="form-control" required >
-                    <label for="image">Blog image</label>
-                    <input type="file" name="image" id="image" class="form-control" required accept="image/jpeg, image/png, image/tfif,image/webpg">
-                    <label for="video">Blog Video</label>
-                    <input type="file" name="video" id="video" class="form-control">
-
-                    <label for="category">Blog Category</label>
-                    <select name="category" id="category" class="form-control" required>
-                        <option disabled> -- select --</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
-                        <option value="4">Option 4</option>
-                    </select>
-
+                    {{form.as_p}}
 
                     <!-- blog body -->
                     <h4 style="font-weight: bold;">Blog Body</h4>
@@ -161,7 +147,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div id="output" class="bg-light text-dark" contenteditable="true"></div>
+                    <div id="output" contenteditable="true" oninput = "makeContentConnect(this);"></div>
                     <button type="submit" class="btn btn-dark col-sm-12">Post Blog</button>
                 </form>
             </div>
@@ -192,8 +178,8 @@
         })
     }
 
-    function putBodyContentToHiddenField(el){
-        document.getElementById("id_body").value = el.innerHTML;
+    function makeContentConnect(blog_Content_element){
+        document.getElementById("blog_body").value = blog_Content_element.innerHTML;
     }
 </script>
 
